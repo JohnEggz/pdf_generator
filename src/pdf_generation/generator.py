@@ -75,7 +75,7 @@ def draw_dziennik(
     c.setFont(settings.FONT_NAME, 16)
     my_table(
         c,
-        [["Tytuł: ", training.get(settings.KEY_NAZWA_SZKOLENIA, "PLACEHOLDER")]],
+        [[f"Tytuł: {training.get(settings.KEY_NAZWA_SZKOLENIA, 'PLACEHOLDER')}"]],
         0,
         15.8*cm,
         None,
