@@ -321,8 +321,8 @@ def draw_certyfikat(
     c.drawInlineImage(settings.IMAGE_LOGO_PATH, 1.5*cm, 26*cm, width=6.2*cm, height=2.5*cm)
     c.drawInlineImage(settings.IMAGE_STAMP_PATH, 12.1*cm, 26.4*cm, width=7.5*cm, height=2.2*cm)
     c.drawString(1.2*cm, 23.1*cm, "SzPR/25/...")
-    c.setStrokeColor(colors.blue)
-    c.setFillColor(colors.blue)
+    c.setStrokeColor(colors.lightblue)
+    c.setFillColor(colors.lightblue)
     c.line(2.8*cm, 22.4*cm, 18.2*cm, 22.4*cm)
     c.setFont(settings.FONT_NAME, 22)
     c.drawCentredString(A4[0]/2, 21.3*cm, "ZAŚWIADCZENIE")
@@ -419,7 +419,7 @@ def _generate_logbook(data_json, output_path):
 # SECTION: PUBLIC API
 # ==============================================================================
 
-def generate(data_json: Dict[str, Any], output_dir: str, data_json_old: Dict[str, Any], **kwargs):
+def generate(data_json: Dict[str, Any], output_dir: str, **kwargs):
     """
     Main PDF generation orchestrator.
     Generates a logbook and all required certificates.

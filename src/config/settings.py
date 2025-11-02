@@ -4,6 +4,7 @@ Central configuration file for the application.
 Contains constants, file paths, and UI definitions.
 """
 from pathlib import Path
+import platform
 
 # --- DIRECTORY AND FILE CONFIGURATION ---
 # Use pathlib for more robust path handling
@@ -11,7 +12,8 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 ASSETS_DIR = Path(__file__).parent.parent / "pdf_generation" / "assets"
 # This path might need to be adjusted based on where you store data
-DEFAULT_TRAINING_ROOT = "/home/john/Documents/mom_confidential"
+# DEFAULT_TRAINING_ROOT = "/home/john/Documents/mom_confidential"
+DEFAULT_TRAINING_ROOT = "C:/Users/MC/Downloads/pdfy_wygenerowane"
 ARCHIVE_SUBDIR = "archiwum"
 LISTA_OBECNOSCI_FILENAME = "lista_obecnosci.ods"
 ANKIETA_EWALUACYJNA_FILENAME = "ankieta_ewaluacyjna.ods"
