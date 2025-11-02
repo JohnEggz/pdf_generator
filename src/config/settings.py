@@ -12,8 +12,8 @@ import platform
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 ASSETS_DIR = Path(__file__).parent.parent / "pdf_generation" / "assets"
 # This path might need to be adjusted based on where you store data
-# DEFAULT_TRAINING_ROOT = "/home/john/Documents/mom_confidential"
-DEFAULT_TRAINING_ROOT = "C:/Users/MC/Downloads/pdfy_wygenerowane"
+DEFAULT_TRAINING_ROOT = "/home/john/Documents/mom_confidential"
+# DEFAULT_TRAINING_ROOT = "C:/Users/MC/Downloads/pdfy_wygenerowane"
 ARCHIVE_SUBDIR = "archiwum"
 LISTA_OBECNOSCI_FILENAME = "lista_obecnosci.ods"
 ANKIETA_EWALUACYJNA_FILENAME = "ankieta_ewaluacyjna.ods"
@@ -57,7 +57,7 @@ KEY_PARTICIPANTS = "Osoby"
 # --- UI DEFINITIONS ---
 # Field names for the training information form
 TRAINING_FIELDS = {
-    KEY_NUMER_SZKOLENIA: "Training Number (e.g., 9)",
+    KEY_NUMER_SZKOLENIA: "Training Number (e.g., SzRP/25/1)",
     KEY_NAZWA_SZKOLENIA: "Training Name (e.g., Teacher Support)",
     KEY_MIEJSCE_SZKOLENIA: "Location (e.g., SP 34)",
     KEY_DATA_SZKOLENIA: "Date (e.g., 10.10.2025)",

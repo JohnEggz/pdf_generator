@@ -56,7 +56,7 @@ def fix_date(input_date: Any) -> str:
         if not (1900 < year < current_year + 2): # Allow next year
             raise ValueError("Year out of reasonable range")
 
-        return f"{day:02d}.{month:02d}.{year}"
+        return f"{day:02d}.{month:02d}.{year} r."
     except (ValueError, TypeError) as e:
         print(f"Error parsing date parts '{day_str}-{month_str}-{year_str}': {e}")
         return str(input_date)

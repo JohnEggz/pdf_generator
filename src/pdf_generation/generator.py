@@ -102,7 +102,7 @@ def draw_dziennik(
         c,
         [["Miejsce: ", training.get(settings.KEY_MIEJSCE_SZKOLENIA, "PLACEHOLDER")]],
         left,
-        9*cm,
+        8.4*cm,
         None,
         has_border=False,
         font_size=12,
@@ -110,7 +110,7 @@ def draw_dziennik(
         padding=False
     )
     c.setFont(settings.FONT_NAME, 12)
-    c.drawString(left, 6.5*cm, f"Prowadzący:{training.get(settings.KEY_PROWADZACY, 'PLACEHOLDER')}")
+    c.drawString(left, 6.5*cm, f"Prowadzący: {training.get(settings.KEY_PROWADZACY, 'PLACEHOLDER')}")
     # Logo
     w, h = 6.2*cm, 2.5*cm; x = page_width - 0.8*cm - w; y = top - 0.8*cm - h
     c.drawInlineImage(settings.IMAGE_LOGO_PATH, x, y, width=w, height=h)
@@ -186,7 +186,7 @@ def draw_dziennik(
         [
             1*cm,
             6*cm,
-            2.5*cm,
+            3*cm,
             4*cm,
             5*cm,
         ],
@@ -206,7 +206,7 @@ def draw_dziennik(
             [
                 i + 1,
                 p.get(settings.KEY_IMIE_NAZWISKO, "PLACEHOLDER"),
-                f"SzRP/25/{training.get(settings.KEY_NUMER_SZKOLENIA, 'PLACEHOLDER')}/{i + 1}",
+                f"{training.get(settings.KEY_NUMER_SZKOLENIA, 'PLACEHOLDER')}/{i + 1}",
             ]
             for i, p in enumerate(participants)
         ]
@@ -238,7 +238,7 @@ def draw_dziennik(
     c.drawString(left, current_y, "Małopolski Niepubliczny Ośrodek Doskonalenia Nauczycieli Best Practice Edukacja")
     current_y -= 2*cm
     c.setFont(settings.FONT_NAME, 12)
-    c.drawString(left, current_y, "Opiekun: Małgożata Cużytek")
+    c.drawString(left, current_y, "Opiekun: Małgorzata Cużytek")
     current_y -= 3*cm
     c.setFont(settings.FONT_NAME, 12)
     c.drawString(left, current_y, "SPRAWOZDANIE Z KURSU:")
@@ -280,8 +280,8 @@ def draw_dziennik(
         0,
         current_y,
         [
-            2.5*cm,
-            2.5*cm,
+            3*cm,
+            3*cm,
             1.5*cm,
             2*cm,
             3*cm,
@@ -300,7 +300,7 @@ def draw_dziennik(
     )
 
     c.setFont(settings.FONT_NAME, 12)
-    c.drawString(left, 5*cm, f"Wieliczka,{datetime.now().strftime("%d.%m.%Y")}")
+    c.drawString(left, 5*cm, f"Wieliczka, {datetime.now().strftime("%d.%m.%Y")}")
 
     c.save()
 
@@ -320,9 +320,9 @@ def draw_certyfikat(
     c.setFont(settings.FONT_NAME, 12)
     c.drawInlineImage(settings.IMAGE_LOGO_PATH, 1.5*cm, 26*cm, width=6.2*cm, height=2.5*cm)
     c.drawInlineImage(settings.IMAGE_STAMP_PATH, 12.1*cm, 26.4*cm, width=7.5*cm, height=2.2*cm)
-    c.drawString(1.2*cm, 23.1*cm, "SzPR/25/...")
-    c.setStrokeColor(colors.lightblue)
-    c.setFillColor(colors.lightblue)
+    c.drawString(1.2*cm, 23.1*cm, participant.get(settings.KEY_UUID, "PLACEHOLDER"))
+    c.setStrokeColor(colors.HexColor("#73BFCE"))
+    c.setFillColor(colors.HexColor("#73BFCE"))
     c.line(2.8*cm, 22.4*cm, 18.2*cm, 22.4*cm)
     c.setFont(settings.FONT_NAME, 22)
     c.drawCentredString(A4[0]/2, 21.3*cm, "ZAŚWIADCZENIE")
@@ -335,7 +335,7 @@ def draw_certyfikat(
 
     my_table(
         c,
-        [[participant.get(settings.KEY_IMIE_NAZWISKO, "PLACEHOLDER")]],
+        [[f"{participant.get(settings.KEY_IMIE_NAZWISKO, "PLACEHOLDER")}"]],
         0,
         18.4*cm,
         None,
@@ -349,13 +349,13 @@ def draw_certyfikat(
 
 
     c.setFont(settings.FONT_NAME, 12)
-    c.drawCentredString(A4[0]/2, 16.6*cm, f"Urodzony/a: {participant.get(settings.KEY_DATA_URODZENIA, "PLACEHOLDER")}")
+    c.drawCentredString(A4[0]/2, 16.6*cm, f"Urodzony/a: {participant.get(settings.KEY_DATA_URODZENIA, "PLACEHOLDER")}, {participant.get(settings.KEY_MIEJSCE_URODZENIA, 'PLACEHOLDER')}")
     c.drawCentredString(A4[0]/2, 15.8*cm, "Ukończył/a szkolenie:")
     my_table(
         c,
         [[f"„{training.get(settings.KEY_NAZWA_SZKOLENIA, "PLACEHOLDER")}”"]],
         0,
-        14.3*cm,
+        15.3*cm,
         None,
         has_border=False,
         center_table=True,
@@ -384,12 +384,16 @@ def draw_certyfikat(
     current_y = my_table(
         c,
         [
-            ["Tematyka", "Liczba\ngodzin", "Podpis\nTrenera"],
-            [training.get(settings.KEY_TEMATYKA, "PLACEHOLDER"), training.get(settings.KEY_CZAS_TRWANIA, "PLACEHOLDER"), ""],
+            [
+                "Tematyka",
+            ],
+            [
+                training.get(settings.KEY_TEMATYKA, "PLACEHOLDER"),
+            ],
         ],
         left,
         current_y,
-        [12.5*cm, 2*cm, 3*cm],
+        [17.5*cm],
         center_table=True,
     )
 
@@ -404,6 +408,7 @@ def _generate_all_certificates(data_json, output_dir, force):
     training = data_json.get(settings.KEY_TRAINING, {})
 
     for i, person in enumerate(participants):
+        person[settings.KEY_UUID] = f"{training.get(settings.KEY_NUMER_SZKOLENIA)}/{i+1}"
         file_path = os.path.join(output_dir, f"certyfikat_{i+1}.pdf")
         draw_certyfikat(training, person, file_path)
         print("-> created:", file_path)
