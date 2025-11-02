@@ -321,8 +321,8 @@ def draw_certyfikat(
     c.drawInlineImage(settings.IMAGE_LOGO_PATH, 1.5*cm, 26*cm, width=6.2*cm, height=2.5*cm)
     c.drawInlineImage(settings.IMAGE_STAMP_PATH, 12.1*cm, 26.4*cm, width=7.5*cm, height=2.2*cm)
     c.drawString(1.2*cm, 23.1*cm, participant.get(settings.KEY_UUID, "PLACEHOLDER"))
-    c.setStrokeColor(colors.HexColor("#73BFCE"))
-    c.setFillColor(colors.HexColor("#73BFCE"))
+    c.setStrokeColor(colors.HexColor("#7B9FF3"))
+    c.setFillColor(colors.HexColor("#7B9FF3"))
     c.line(2.8*cm, 22.4*cm, 18.2*cm, 22.4*cm)
     c.setFont(settings.FONT_NAME, 22)
     c.drawCentredString(A4[0]/2, 21.3*cm, "ZAŚWIADCZENIE")
@@ -349,13 +349,16 @@ def draw_certyfikat(
 
 
     c.setFont(settings.FONT_NAME, 12)
-    c.drawCentredString(A4[0]/2, 16.6*cm, f"Urodzony/a: {participant.get(settings.KEY_DATA_URODZENIA, "PLACEHOLDER")}, {participant.get(settings.KEY_MIEJSCE_URODZENIA, 'PLACEHOLDER')}")
-    c.drawCentredString(A4[0]/2, 15.8*cm, "Ukończył/a szkolenie:")
+    c.drawCentredString(A4[0]/2, 16.6*cm, f"urodzony/a: {participant.get(settings.KEY_DATA_URODZENIA, "PLACEHOLDER")}, {participant.get(settings.KEY_MIEJSCE_URODZENIA, 'PLACEHOLDER')}")
+    current_y = 15 * cm
+    c.drawCentredString(A4[0] / 2, current_y, "ukończył/a szkolenie:")
+
+    current_y -= 0.5 * cm
     my_table(
         c,
-        [[f"„{training.get(settings.KEY_NAZWA_SZKOLENIA, "PLACEHOLDER")}”"]],
+        [[f"„{training.get(settings.KEY_NAZWA_SZKOLENIA, 'PLACEHOLDER')}”"]],
         0,
-        15.3*cm,
+        current_y,
         None,
         has_border=False,
         center_table=True,
@@ -366,12 +369,31 @@ def draw_certyfikat(
     )
 
     c.setFont(settings.FONT_NAME, 12)
-    c.drawString(5.4*cm, 12.3*cm, f"w dniu: {training.get(settings.KEY_DATA_SZKOLENIA, "PLACEHOLDER")}")
-    c.drawString(11.4*cm, 12.3*cm, f"w wymiarze: {training.get(settings.KEY_CZAS_TRWANIA, "PLACEHOLDER")}")
-    c.drawCentredString(A4[0]/2, 10.5*cm, "Zorganizowane przez Niepubliczną Placówkę Doskonalenia Nauczycieli")
-    c.drawCentredString(A4[0]/2, 9.9*cm, "Best Practice Edukacja w Wieliczce")
-    c.drawString(3*cm, 5.6*cm, "Zaświadczenie wydano:")
-    c.drawString(3*cm, 4.8*cm, f"Wieliczka, {datetime.now().strftime("%d.%m.%Y")}")
+
+    current_y -= 3.0 * cm
+    c.drawString(5.4 * cm, current_y, f"w dniu: {training.get(settings.KEY_DATA_SZKOLENIA, 'PLACEHOLDER')}")
+
+    c.drawString(
+        11.4 * cm,
+        current_y,
+        f"w wymiarze: {training.get(settings.KEY_CZAS_TRWANIA, 'PLACEHOLDER')}"
+    )
+
+    current_y -= 1.8 * cm
+    c.drawCentredString(
+        A4[0] / 2,
+        current_y,
+        "zorganizowane przez Niepubliczną Placówkę Doskonalenia Nauczycieli"
+    )
+
+    current_y -= 0.6 * cm
+    c.drawCentredString(A4[0] / 2, current_y, "Best Practice Edukacja w Wieliczce")
+
+    current_y = 5.6*cm
+    c.drawString(3 * cm, current_y, "Zaświadczenie wydano:")
+
+    current_y -= 0.8 * cm
+    c.drawString(3 * cm, current_y, f"Wieliczka, {datetime.now().strftime('%d.%m.%Y')} r.")
 
     # PAGE 2
     left = 2.72*cm
