@@ -133,7 +133,7 @@ class ProjectManager:
         )
 
         # Save the data back to file if timestamps were added/changed
-        if updated_data != data:
-            self.save_project_data(updated_data)
+        # if updated_data != data:
+        #     self.save_project_data(updated_data)
 
-        return updated_data
+        # return updated_data
