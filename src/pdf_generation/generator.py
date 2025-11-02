@@ -73,7 +73,7 @@ def draw_dziennik(
     c.setFont(settings.FONT_NAME, 28)
     c.drawCentredString(middle, 18.3*cm, "Dziennik zajęć")
     c.setFont(settings.FONT_NAME, 16)
-    my_table(
+    current_y = my_table(
         c,
         [[f"Tytuł: {training.get(settings.KEY_NAZWA_SZKOLENIA, 'PLACEHOLDER')}"]],
         0,
@@ -90,7 +90,7 @@ def draw_dziennik(
         c,
         [["KOD SZKOLENIA: ", training.get(settings.KEY_NUMER_SZKOLENIA, "PLACEHOLDER")]],
         0,
-        13.9*cm,
+        current_y,
         None,
         has_border=False,
         center_table=True,
