@@ -1,0 +1,8 @@
+charset-normalizer==3.4.4
+ezodf==0.3.2
+lxml==6.0.2
+pillow==12.0.0
+pyqt6==6.10.0
+pyqt6-qt6==6.10.0
+pyqt6-sip==13.10.2
+reportlab==4.4.4
