@@ -300,7 +300,8 @@ def draw_dziennik(
     )
 
     c.setFont(settings.FONT_NAME, 12)
-    c.drawString(left, 5*cm, f"Wieliczka, {datetime.now().strftime("%d.%m.%Y")}")
+    # c.drawString(left, 5*cm, f"Wieliczka, {datetime.now().strftime("%d.%m.%Y")}")
+    c.drawString(left, 5*cm, f"Wieliczka, {training.get(settings.KEY_DATA_WYSTAWIENIA, "PLACEHOLDER")}")
 
     c.save()
 
@@ -393,7 +394,7 @@ def draw_certyfikat(
     c.drawString(3 * cm, current_y, "Zaświadczenie wydano:")
 
     current_y -= 0.8 * cm
-    c.drawString(3 * cm, current_y, f"Wieliczka, {datetime.now().strftime('%d.%m.%Y')} r.")
+    c.drawString(3 * cm, current_y, f"Wieliczka, {training.get(settings.KEY_DATA_WYSTAWIENIA, "PLACEHOLDER")} r.")
 
     # PAGE 2
     left = 2.72*cm

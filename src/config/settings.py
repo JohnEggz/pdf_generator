@@ -47,6 +47,7 @@ KEY_DATA_SZKOLENIA = "data_szkolenia"
 KEY_PROWADZACY = "prowadzacy"
 KEY_CZAS_TRWANIA = "czas_trwania"
 KEY_CZAS_TRWANIA_OD_DO = "czas_trwania_od_do"
+KEY_DATA_WYSTAWIENIA = "data_wystawienia"
 KEY_TEMATYKA = "tematyka"
 
 # Top-level keys
@@ -64,6 +65,7 @@ TRAINING_FIELDS = {
     KEY_PROWADZACY: "Instructor (e.g., John Doe)",
     KEY_CZAS_TRWANIA: "Duration (e.g., 3h)",
     KEY_CZAS_TRWANIA_OD_DO: "Time Range (e.g., 17:00 - 19:00)",
+    KEY_DATA_WYSTAWIENIA: "Data wystawienia zaświadczenia"
 }
 
 # Column headers and corresponding keys for the participants table

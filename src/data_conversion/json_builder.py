@@ -20,6 +20,7 @@ def create_initial_json(ods_path: str, output_json_path: str):
             settings.KEY_PROWADZACY: "",
             settings.KEY_CZAS_TRWANIA: "",
             settings.KEY_CZAS_TRWANIA_OD_DO: "",
+            settings.KEY_DATA_WYSTAWIENIA: "",
             settings.KEY_TEMATYKA: "",
         },
     }
