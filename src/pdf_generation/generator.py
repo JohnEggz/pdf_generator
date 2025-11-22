@@ -3,6 +3,7 @@
 A standalone module for generating all PDF documents for the training program.
 It contains all necessary helpers, styles, components, and generation logic.
 """
+import PIL.Image
 import os
 import json
 from datetime import datetime
