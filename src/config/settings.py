@@ -4,8 +4,26 @@ Central configuration file for the application.
 Contains constants, file paths, and UI definitions.
 """
 from pathlib import Path
-import platform
 from platformdirs import user_documents_dir
+import sys
+
+def get_resource_path(relative_path: str) -> Path:
+    """
+    Gets the absolute path to a resource file, handling PyInstaller bundling.
+    `relative_path` should be relative to the project root,
+    e.g., "src/pdf_generation/assets/DejaVuSans.ttf".
+    """
+    if getattr(sys, 'frozen', False) and hasattr(sys, '_MEIPASS'):
+        # Running inside a PyInstaller bundle
+        # sys._MEIPASS is the root of the extracted bundle contents
+        base_path = Path(sys._MEIPASS)
+    else:
+        # Running from source (development environment)
+        # This resolves the path to the directory containing the current script.
+        # If your main.py is in the project root, this will be your project root.
+        base_path = Path(__file__).resolve().parent
+
+    return base_path / relative_path
 
 # --- DIRECTORY AND FILE CONFIGURATION ---
 # Use pathlib for more robust path handling
@@ -24,10 +42,10 @@ DATA_FILENAME = "data.json"
 DATA_COMPARE_FILENAME = "data.json.old"
 CERTIFICATES_DIR_NAME = "certyfikaty"
 LOGBOOK_FILENAME = "dziennik.pdf"
-FONT_PATH = str(ASSETS_DIR / "DejaVuSans.ttf")
+FONT_PATH = str(get_resource_path(str(ASSETS_DIR / "DejaVuSans.ttf")))
 FONT_NAME = "DejaVuSans"
-IMAGE_LOGO_PATH = str(ASSETS_DIR / "logo.png")
-IMAGE_STAMP_PATH = str(ASSETS_DIR / "podpis.png")
+IMAGE_LOGO_PATH = str(get_resource_path(str(ASSETS_DIR / "logo.png")))
+IMAGE_STAMP_PATH = str(get_resource_path(str(ASSETS_DIR / "podpis.png")))
 
 
 # --- JSON DATA KEYS ---
