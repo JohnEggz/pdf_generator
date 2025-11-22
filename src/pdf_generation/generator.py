@@ -15,7 +15,9 @@ from reportlab.lib.units import cm
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
+from reportlab.lib.utils import ImageReader
 # from typing import List, Dict, Any, Callable
+
 
 # --- Consolidated Imports ---
 # from reportlab.pdfgen import canvas
@@ -33,7 +35,6 @@ from reportlab.pdfgen import canvas
 
 from src.config import settings
 from src.pdf_generation.tables import my_table
-
 
 # ==============================================================================
 # SECTION: UTILITIES (from former utils.py)
@@ -114,7 +115,13 @@ def draw_dziennik(
     c.drawString(left, 6.5*cm, f"Prowadzący: {training.get(settings.KEY_PROWADZACY, 'PLACEHOLDER')}")
     # Logo
     w, h = 6.2*cm, 2.5*cm; x = page_width - 0.8*cm - w; y = top - 0.8*cm - h
-    c.drawInlineImage(settings.IMAGE_LOGO_PATH, x, y, width=w, height=h)
+    c.drawImage(
+        ImageReader(PIL.Image.open(settings.IMAGE_LOGO_PATH)),
+        x,
+        y,
+        width=w,
+        height=h
+    )
 
     # PAGE 2
     c.showPage()
@@ -320,8 +327,20 @@ def draw_certyfikat(
     c = canvas.Canvas(output_path, pagesize=A4)
 
     c.setFont(settings.FONT_NAME, 12)
-    c.drawInlineImage(settings.IMAGE_LOGO_PATH, 1.5*cm, 26*cm, width=6.2*cm, height=2.5*cm)
-    c.drawInlineImage(settings.IMAGE_STAMP_PATH, 12.1*cm, 26.4*cm, width=7.5*cm, height=2.2*cm)
+    c.drawImage(
+        ImageReader(PIL.Image.open(settings.IMAGE_LOGO_PATH)),
+        1.5*cm,
+        26*cm,
+        width=6.2*cm,
+        height=2.5*cm
+    )
+    c.drawImage(
+        ImageReader(PIL.Image.open(settings.IMAGE_STAMP_PATH)),
+        12.1*cm,
+        26.4*cm,
+        width=7.5*cm,
+        height=2.2*cm
+    )
     c.drawString(1.2*cm, 23.1*cm, participant.get(settings.KEY_UUID, "PLACEHOLDER"))
     c.setStrokeColor(colors.HexColor("#7B9FF3"))
     c.setFillColor(colors.HexColor("#7B9FF3"))

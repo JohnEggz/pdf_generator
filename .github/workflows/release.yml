@@ -27,15 +27,17 @@ jobs:
           pip install pyinstaller
 
       - name: Build with PyInstaller
-        # --- MODIFICATION HERE FOR WINDOWS ---
-        run: pyinstaller --onefile --noconsole --icon=icon.ico main.py --add-data "src/pdf_generation/assets/DejaVuSans.ttf;src/pdf_generation/assets"
-        # -------------------------------------
+        run: |
+          pyinstaller --onefile --noconsole --icon=icon.ico \
+            --name MyAwesomeApp \ # <--- ADD THIS LINE
+            main.py \
+            --add-data "src/pdf_generation/assets;src/pdf_generation/assets"
 
       - name: Upload Windows Executable
         uses: actions/upload-artifact@v4
         with:
           name: my_app_windows_exe
-          path: dist/main.exe
+          path: dist/Pdf_Generator.exe # <--- UPDATE THIS PATH
 
   build_linux:
     name: Build Linux Executable
@@ -58,15 +60,17 @@ jobs:
           pip install pyinstaller
 
       - name: Build with PyInstaller
-        # --- MODIFICATION HERE FOR LINUX ---
-        run: pyinstaller --onefile main.py --add-data "src/pdf_generation/assets/DejaVuSans.ttf:src/pdf_generation/assets"
-        # -----------------------------------
+        run: |
+          pyinstaller --onefile \
+            --name MyAwesomeApp \ # <--- ADD THIS LINE
+            main.py \
+            --add-data "src/pdf_generation/assets:src/pdf_generation/assets"
 
       - name: Upload Linux Executable
         uses: actions/upload-artifact@v4
         with:
           name: my_app_linux_executable
-          path: dist/main
+          path: dist/Pdf_Generator # <--- UPDATE THIS PATH
 
   create_release:
     name: Create GitHub Release
@@ -98,6 +102,6 @@ jobs:
 
             See assets for platform-specific binaries.
           files: |
-            artifacts/windows/main.exe
-            artifacts/linux/main
+            artifacts/windows/Pdf_Generator.exe # <--- UPDATE THIS PATH
+            artifacts/linux/Pdf_Generator       # <--- UPDATE THIS PATH
           prerelease: false
