@@ -9,6 +9,7 @@ dependencies = [
     "ezodf==0.3.2",
     "lxml==6.0.2",
     "pillow==12.0.0",
+    "platformdirs>=4.5.0",
     "pyqt6==6.10.0",
     "pyqt6-qt6==6.10.0",
     "pyqt6-sip==13.10.2",
